@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Οι stock φωτογραφίες πίσω από τα προφίλ</title>
+  <style>
+:root {
+  --ink: #241323;
+  --muted: #725d70;
+  --paper: #fff9f7;
+  --blush: #ffeded;
+  --coral: #f05b62;
+  --coral-dark: #c83e50;
+  --plum: #5b244f;
+  --line: rgba(91, 36, 79, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(240, 91, 98, 0.12), transparent 29rem),
+    linear-gradient(180deg, #fff9f7 0%, #fff4f2 100%);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 44px 0 34px;
+}
+
+.hero,
+footer {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+  color: var(--plum);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.brand-mark {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--coral);
+  color: white;
+  font-size: 11px;
+  letter-spacing: -0.04em;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--coral-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+h1 {
+  max-width: 820px;
+  margin: 0;
+  color: var(--coral);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(39px, 5.5vw, 74px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.intro {
+  max-width: 780px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.55;
+}
+
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.summary strong {
+  color: var(--plum);
+  font-size: 24px;
+}
+
+.summary i {
+  width: 4px;
+  height: 4px;
+  margin: 0 5px 3px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.carousel-shell {
+  position: relative;
+  width: 100%;
+  margin-top: 34px;
+  padding: 5px 0;
+}
+
+.carousel-shell::before,
+.carousel-shell::after {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  width: clamp(30px, 8vw, 150px);
+  content: "";
+  pointer-events: none;
+}
+
+.carousel-shell::before {
+  left: 0;
+  background: linear-gradient(90deg, #fff5f3 4%, rgba(255, 245, 243, 0));
+}
+
+.carousel-shell::after {
+  right: 0;
+  background: linear-gradient(270deg, #fff5f3 4%, rgba(255, 245, 243, 0));
+}
+
+.marquee-row {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 68s linear infinite;
+  will-change: transform;
+}
+
+.marquee-row.reverse .marquee-track {
+  animation-name: scroll-right;
+}
+
+.marquee-row:hover .marquee-track,
+.marquee-row:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  gap: 15px;
+  padding-right: 15px;
+}
+
+.profile-card {
+  position: relative;
+  flex: 0 0 208px;
+  width: 208px;
+  overflow: hidden;
+  border: 1px solid rgba(91, 36, 79, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 28px rgba(75, 30, 62, 0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.profile-card:hover,
+.profile-card:focus-within {
+  z-index: 2;
+  box-shadow: 0 16px 34px rgba(75, 30, 62, 0.17);
+  transform: translateY(-4px);
+}
+
+.portrait-link {
+  display: block;
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  height: 228px;
+  object-fit: cover;
+  background: var(--blush);
+  filter: saturate(0.94);
+}
+
+.card-copy {
+  padding: 13px 14px 14px;
+}
+
+.handle {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.handle:hover,
+.handle:focus-visible {
+  color: var(--coral-dark);
+}
+
+.source {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.source strong {
+  overflow: hidden;
+  color: var(--coral-dark);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source:hover strong,
+.source:focus-visible strong {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 27px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+footer p {
+  max-width: 880px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 700px) {
+  main {
+    padding-top: 28px;
+  }
+
+  .hero,
+  footer {
+    width: min(100% - 30px, 1180px);
+  }
+
+  .brand {
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 58px);
+  }
+
+  .intro {
+    margin-top: 17px;
+  }
+
+  .summary {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .summary span:last-child,
+  .summary i {
+    display: none;
+  }
+
+  .carousel-shell {
+    margin-top: 24px;
+  }
+
+  .profile-card {
+    flex-basis: 172px;
+    width: 172px;
+    border-radius: 16px;
+  }
+
+  .portrait {
+    height: 188px;
+  }
+
+  .marquee-group {
+    gap: 11px;
+    padding-right: 11px;
+  }
+
+  .card-copy {
+    padding: 11px 12px 12px;
+  }
+
+  footer {
+    margin-top: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-play-state: paused;
+  }
+}
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="brand" aria-label="Fact Review">
+        <span class="brand-mark">FR</span><span>FACT REVIEW</span>
+      </div>
+      <p class="eyebrow">ΑΝΑΛΥΣΗ ΕΙΚΟΝΩΝ ΠΡΟΦΙΛ</p>
+      <h1>Οι stock φωτογραφίες πίσω από τα προφίλ</h1>
+      <p class="intro">
+        Λογαριασμοί που εμφανίζονται ως πραγματικά πρόσωπα χρησιμοποιούν εικόνες
+        οι οποίες εντοπίζονται σε καταλόγους stock φωτογραφιών ή σε προγενέστερες
+        διαδικτυακές πηγές.
+      </p>
+      <div class="summary" aria-label="Σύνοψη">
+        <strong>29</strong>
+        <span>τεκμηριωμένες αντιστοιχίσεις</span>
+        <i aria-hidden="true"></i>
+        <span>Πέρασε τον δείκτη για παύση</span>
+      </div>
+    </header>
+
+    <section class="carousel-shell" aria-label="Συλλογή εικόνων προφίλ">
+      
+      <div class="marquee-row">
+        <div class="marquee-track">
+          
+    <div class="marquee-group">
+      
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/petertogokane" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @petertogokane στο X">
+        <img class="portrait" src="./profiles/petertogokane.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @petertogokane" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/petertogokane" target="_blank" rel="noreferrer">@petertogokane</a>
+        <a class="source" href="https://www.magnific.com/free-photo/man-wearing-vr-glasses-with-gradient-background_12688340.htm?utm_source=Pinterest&amp;utm_medium=organic&amp;epik=dj0yJnU9b1ItYkJyTzBqV25LS2QteWt5Zy1zWnhkSkMyTlQyOUImcD0wJm49M2hweS1yX2p0a28wdmpieXFPRHA3USZ0PUFBQUFBR3BmUVRV" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @petertogokane: Magnific">
+          <span>Πηγή</span><strong>Magnific</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/antonia_ka49" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @antonia_ka49 στο X">
+        <img class="portrait" src="./profiles/antonia_ka49.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @antonia_ka49" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/antonia_ka49" target="_blank" rel="noreferrer">@antonia_ka49</a>
+        <a class="source" href="https://www.piqsels.com/en/public-domain-photo-jxuqv" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @antonia_ka49: Piqsels">
+          <span>Πηγή</span><strong>Piqsels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/anestis_markoy" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @anestis_markoy στο X">
+        <img class="portrait" src="./profiles/anestis_markoy.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @anestis_markoy" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/anestis_markoy" target="_blank" rel="noreferrer">@anestis_markoy</a>
+        <a class="source" href="https://www.alamy.com/stock-photo-man-wearing-virtual-reality-goggles-studio-shot-gray-backgrou-102231955.html" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @anestis_markoy: Alamy">
+          <span>Πηγή</span><strong>Alamy</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/MarkosBlair" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @MarkosBlair στο X">
+        <img class="portrait" src="./profiles/MarkosBlair.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @MarkosBlair" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/MarkosBlair" target="_blank" rel="noreferrer">@MarkosBlair</a>
+        <a class="source" href="https://unsplash.com/photos/man-holding-his-hair-against-sunlight-oTHXpT6nJsE" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @MarkosBlair: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/maurodemou" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @maurodemou στο X">
+        <img class="portrait" src="./profiles/maurodemou.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @maurodemou" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/maurodemou" target="_blank" rel="noreferrer">@maurodemou</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-gray-t-shirt-and-gray-pants-sitting-on-gray-concrete-bench-during-daytime-YsiSAp3ccvk" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @maurodemou: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/pap_markos" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @pap_markos στο X">
+        <img class="portrait" src="./profiles/pap_markos.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @pap_markos" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/pap_markos" target="_blank" rel="noreferrer">@pap_markos</a>
+        <a class="source" href="https://pxhere.com/en/photo/1083442" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @pap_markos: PxHere">
+          <span>Πηγή</span><strong>PxHere</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/yvonniangel" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @yvonniangel στο X">
+        <img class="portrait" src="./profiles/yvonniangel.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @yvonniangel" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/yvonniangel" target="_blank" rel="noreferrer">@yvonniangel</a>
+        <a class="source" href="https://www.pexels.com/photo/side-view-photo-of-woman-in-black-dress-standing-with-her-arms-crossed-looking-into-the-distance-2609462/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @yvonniangel: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/politoulisf" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @politoulisf στο X">
+        <img class="portrait" src="./profiles/politoulisf.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @politoulisf" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/politoulisf" target="_blank" rel="noreferrer">@politoulisf</a>
+        <a class="source" href="https://pixabay.com/photos/concept-man-papers-person-plan-1868728/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @politoulisf: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/MarinaPoly123" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @MarinaPoly123 στο X">
+        <img class="portrait" src="./profiles/MarinaPoly123.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @MarinaPoly123" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/MarinaPoly123" target="_blank" rel="noreferrer">@MarinaPoly123</a>
+        <a class="source" href="https://unsplash.com/photos/woman-wearing-black-hat-standing-beside-beige-grass-ShWYUOQ0raw" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @MarinaPoly123: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/dareiapoliti" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @dareiapoliti στο X">
+        <img class="portrait" src="./profiles/dareiapoliti.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @dareiapoliti" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/dareiapoliti" target="_blank" rel="noreferrer">@dareiapoliti</a>
+        <a class="source" href="https://unsplash.com/photos/woman-sitting-on-bed-wearing-gray-v-neck-sweater-fvioMHMpFIY" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @dareiapoliti: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/paxatouridist" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @paxatouridist στο X">
+        <img class="portrait" src="./profiles/paxatouridist.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @paxatouridist" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/paxatouridist" target="_blank" rel="noreferrer">@paxatouridist</a>
+        <a class="source" href="https://www.pexels.com/photo/grayscale-photo-of-man-in-black-v-neck-shirt-with-black-background-90764/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @paxatouridist: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/eliop_p" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @eliop_p στο X">
+        <img class="portrait" src="./profiles/eliop_p.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @eliop_p" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/eliop_p" target="_blank" rel="noreferrer">@eliop_p</a>
+        <a class="source" href="https://www.pexels.com/es-es/foto/paisaje-puesta-de-sol-mujer-montana-4909174/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @eliop_p: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/ManolisDam46172" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @ManolisDam46172 στο X">
+        <img class="portrait" src="./profiles/ManolisDam46172.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @ManolisDam46172" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/ManolisDam46172" target="_blank" rel="noreferrer">@ManolisDam46172</a>
+        <a class="source" href="https://espace-voyages.be/our-teams/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @ManolisDam46172: Πολλαπλές ιστοσελίδες">
+          <span>Πηγή</span><strong>Πολλαπλές ιστοσελίδες</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/PapazafGeo" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @PapazafGeo στο X">
+        <img class="portrait" src="./profiles/PapazafGeo.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @PapazafGeo" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/PapazafGeo" target="_blank" rel="noreferrer">@PapazafGeo</a>
+        <a class="source" href="https://pixabay.com/photos/beanie-guy-man-beard-jacket-grey-2562646/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @PapazafGeo: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/AspasiaPer63286" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @AspasiaPer63286 στο X">
+        <img class="portrait" src="./profiles/AspasiaPer63286.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @AspasiaPer63286" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/AspasiaPer63286" target="_blank" rel="noreferrer">@AspasiaPer63286</a>
+        <a class="source" href="https://www.flickr.com/photos/30724662@N07/6866211679" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @AspasiaPer63286: Flickr">
+          <span>Πηγή</span><strong>Flickr</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+    </div>
+          
+    <div class="marquee-group" aria-hidden="true">
+      
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/petertogokane" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @petertogokane στο X">
+        <img class="portrait" src="./profiles/petertogokane.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @petertogokane" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/petertogokane" target="_blank" rel="noreferrer">@petertogokane</a>
+        <a class="source" href="https://www.magnific.com/free-photo/man-wearing-vr-glasses-with-gradient-background_12688340.htm?utm_source=Pinterest&amp;utm_medium=organic&amp;epik=dj0yJnU9b1ItYkJyTzBqV25LS2QteWt5Zy1zWnhkSkMyTlQyOUImcD0wJm49M2hweS1yX2p0a28wdmpieXFPRHA3USZ0PUFBQUFBR3BmUVRV" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @petertogokane: Magnific">
+          <span>Πηγή</span><strong>Magnific</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/antonia_ka49" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @antonia_ka49 στο X">
+        <img class="portrait" src="./profiles/antonia_ka49.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @antonia_ka49" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/antonia_ka49" target="_blank" rel="noreferrer">@antonia_ka49</a>
+        <a class="source" href="https://www.piqsels.com/en/public-domain-photo-jxuqv" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @antonia_ka49: Piqsels">
+          <span>Πηγή</span><strong>Piqsels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/anestis_markoy" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @anestis_markoy στο X">
+        <img class="portrait" src="./profiles/anestis_markoy.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @anestis_markoy" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/anestis_markoy" target="_blank" rel="noreferrer">@anestis_markoy</a>
+        <a class="source" href="https://www.alamy.com/stock-photo-man-wearing-virtual-reality-goggles-studio-shot-gray-backgrou-102231955.html" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @anestis_markoy: Alamy">
+          <span>Πηγή</span><strong>Alamy</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/MarkosBlair" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @MarkosBlair στο X">
+        <img class="portrait" src="./profiles/MarkosBlair.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @MarkosBlair" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/MarkosBlair" target="_blank" rel="noreferrer">@MarkosBlair</a>
+        <a class="source" href="https://unsplash.com/photos/man-holding-his-hair-against-sunlight-oTHXpT6nJsE" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @MarkosBlair: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/maurodemou" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @maurodemou στο X">
+        <img class="portrait" src="./profiles/maurodemou.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @maurodemou" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/maurodemou" target="_blank" rel="noreferrer">@maurodemou</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-gray-t-shirt-and-gray-pants-sitting-on-gray-concrete-bench-during-daytime-YsiSAp3ccvk" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @maurodemou: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/pap_markos" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @pap_markos στο X">
+        <img class="portrait" src="./profiles/pap_markos.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @pap_markos" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/pap_markos" target="_blank" rel="noreferrer">@pap_markos</a>
+        <a class="source" href="https://pxhere.com/en/photo/1083442" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @pap_markos: PxHere">
+          <span>Πηγή</span><strong>PxHere</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/yvonniangel" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @yvonniangel στο X">
+        <img class="portrait" src="./profiles/yvonniangel.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @yvonniangel" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/yvonniangel" target="_blank" rel="noreferrer">@yvonniangel</a>
+        <a class="source" href="https://www.pexels.com/photo/side-view-photo-of-woman-in-black-dress-standing-with-her-arms-crossed-looking-into-the-distance-2609462/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @yvonniangel: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/politoulisf" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @politoulisf στο X">
+        <img class="portrait" src="./profiles/politoulisf.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @politoulisf" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/politoulisf" target="_blank" rel="noreferrer">@politoulisf</a>
+        <a class="source" href="https://pixabay.com/photos/concept-man-papers-person-plan-1868728/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @politoulisf: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/MarinaPoly123" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @MarinaPoly123 στο X">
+        <img class="portrait" src="./profiles/MarinaPoly123.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @MarinaPoly123" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/MarinaPoly123" target="_blank" rel="noreferrer">@MarinaPoly123</a>
+        <a class="source" href="https://unsplash.com/photos/woman-wearing-black-hat-standing-beside-beige-grass-ShWYUOQ0raw" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @MarinaPoly123: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/dareiapoliti" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @dareiapoliti στο X">
+        <img class="portrait" src="./profiles/dareiapoliti.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @dareiapoliti" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/dareiapoliti" target="_blank" rel="noreferrer">@dareiapoliti</a>
+        <a class="source" href="https://unsplash.com/photos/woman-sitting-on-bed-wearing-gray-v-neck-sweater-fvioMHMpFIY" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @dareiapoliti: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/paxatouridist" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @paxatouridist στο X">
+        <img class="portrait" src="./profiles/paxatouridist.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @paxatouridist" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/paxatouridist" target="_blank" rel="noreferrer">@paxatouridist</a>
+        <a class="source" href="https://www.pexels.com/photo/grayscale-photo-of-man-in-black-v-neck-shirt-with-black-background-90764/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @paxatouridist: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/eliop_p" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @eliop_p στο X">
+        <img class="portrait" src="./profiles/eliop_p.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @eliop_p" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/eliop_p" target="_blank" rel="noreferrer">@eliop_p</a>
+        <a class="source" href="https://www.pexels.com/es-es/foto/paisaje-puesta-de-sol-mujer-montana-4909174/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @eliop_p: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/ManolisDam46172" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @ManolisDam46172 στο X">
+        <img class="portrait" src="./profiles/ManolisDam46172.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @ManolisDam46172" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/ManolisDam46172" target="_blank" rel="noreferrer">@ManolisDam46172</a>
+        <a class="source" href="https://espace-voyages.be/our-teams/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @ManolisDam46172: Πολλαπλές ιστοσελίδες">
+          <span>Πηγή</span><strong>Πολλαπλές ιστοσελίδες</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/PapazafGeo" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @PapazafGeo στο X">
+        <img class="portrait" src="./profiles/PapazafGeo.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @PapazafGeo" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/PapazafGeo" target="_blank" rel="noreferrer">@PapazafGeo</a>
+        <a class="source" href="https://pixabay.com/photos/beanie-guy-man-beard-jacket-grey-2562646/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @PapazafGeo: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/AspasiaPer63286" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @AspasiaPer63286 στο X">
+        <img class="portrait" src="./profiles/AspasiaPer63286.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @AspasiaPer63286" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/AspasiaPer63286" target="_blank" rel="noreferrer">@AspasiaPer63286</a>
+        <a class="source" href="https://www.flickr.com/photos/30724662@N07/6866211679" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @AspasiaPer63286: Flickr">
+          <span>Πηγή</span><strong>Flickr</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+    </div>
+        </div>
+      </div>
+
+      <div class="marquee-row reverse">
+        <div class="marquee-track">
+          
+    <div class="marquee-group">
+      
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/NikodemouC" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @NikodemouC στο X">
+        <img class="portrait" src="./profiles/NikodemouC.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @NikodemouC" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/NikodemouC" target="_blank" rel="noreferrer">@NikodemouC</a>
+        <a class="source" href="https://unsplash.com/photos/woman-standing-on-beach-PfK35Iw1JAo" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @NikodemouC: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/theophanak16656" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @theophanak16656 στο X">
+        <img class="portrait" src="./profiles/theophanak16656.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @theophanak16656" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/theophanak16656" target="_blank" rel="noreferrer">@theophanak16656</a>
+        <a class="source" href="https://unsplash.com/photos/woman-standing-in-middle-of-grasses-chnU2vKLAvU" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @theophanak16656: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/SpyropoulosBill" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @SpyropoulosBill στο X">
+        <img class="portrait" src="./profiles/SpyropoulosBill.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @SpyropoulosBill" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/SpyropoulosBill" target="_blank" rel="noreferrer">@SpyropoulosBill</a>
+        <a class="source" href="https://pxhere.com/en/photo/1295888" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @SpyropoulosBill: PxHere">
+          <span>Πηγή</span><strong>PxHere</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/stelioslask9" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @stelioslask9 στο X">
+        <img class="portrait" src="./profiles/stelioslask9.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @stelioslask9" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/stelioslask9" target="_blank" rel="noreferrer">@stelioslask9</a>
+        <a class="source" href="https://unsplash.com/photos/man-in-brown-crew-neck-shirt-p0B7ueoZz8E" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @stelioslask9: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/rabiolosko59603" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @rabiolosko59603 στο X">
+        <img class="portrait" src="./profiles/rabiolosko59603.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @rabiolosko59603" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/rabiolosko59603" target="_blank" rel="noreferrer">@rabiolosko59603</a>
+        <a class="source" href="https://unsplash.com/photos/man-in-blue-denim-jacket-holding-red-plastic-bucket-DbKhVpiewtA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @rabiolosko59603: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Manolis18Pol" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Manolis18Pol στο X">
+        <img class="portrait" src="./profiles/Manolis18Pol.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Manolis18Pol" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Manolis18Pol" target="_blank" rel="noreferrer">@Manolis18Pol</a>
+        <a class="source" href="https://www.pexels.com/photo/man-wearing-baseball-cap-and-backpack-at-golden-hour-1586663/?utm_source=Pinterest&amp;utm_medium=organic" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Manolis18Pol: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/PantSpyros61" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @PantSpyros61 στο X">
+        <img class="portrait" src="./profiles/PantSpyros61.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @PantSpyros61" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/PantSpyros61" target="_blank" rel="noreferrer">@PantSpyros61</a>
+        <a class="source" href="https://www.pexels.com/photo/photo-of-man-holding-camera-1484771/?utm_source=Pinterest&amp;utm_medium=organic" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @PantSpyros61: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/sia_b55" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @sia_b55 στο X">
+        <img class="portrait" src="./profiles/sia_b55.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @sia_b55" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/sia_b55" target="_blank" rel="noreferrer">@sia_b55</a>
+        <a class="source" href="https://emma.pluska.sk/gal/lifestyle/rozpravka-ako-mlada-slovenka-dostala-medzi-australsku-insta-elitu-rozbehla-vyhodny-biznis" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @sia_b55: Plus 1 deň">
+          <span>Πηγή</span><strong>Plus 1 deň</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/NancyVeneracion" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @NancyVeneracion στο X">
+        <img class="portrait" src="./profiles/NancyVeneracion.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @NancyVeneracion" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/NancyVeneracion" target="_blank" rel="noreferrer">@NancyVeneracion</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-white-dress-standing-on-beach-during-daytime-oBUr1nRbcuA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @NancyVeneracion: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/SofiaLikou" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @SofiaLikou στο X">
+        <img class="portrait" src="./profiles/SofiaLikou.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @SofiaLikou" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/SofiaLikou" target="_blank" rel="noreferrer">@SofiaLikou</a>
+        <a class="source" href="https://unsplash.com/photos/grayscale-photo-of-persons-back-wESKMSgZJDo" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @SofiaLikou: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/IoannaVrioni" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @IoannaVrioni στο X">
+        <img class="portrait" src="./profiles/IoannaVrioni.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @IoannaVrioni" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/IoannaVrioni" target="_blank" rel="noreferrer">@IoannaVrioni</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-white-crew-neck-shirt-bL5mIaa_-pI" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @IoannaVrioni: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/daniiorda" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @daniiorda στο X">
+        <img class="portrait" src="./profiles/daniiorda.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @daniiorda" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/daniiorda" target="_blank" rel="noreferrer">@daniiorda</a>
+        <a class="source" href="https://unsplash.com/photos/closeup-photo-of-woman-wearing-black-coat-during-winter-aUfVce9MBx0" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @daniiorda: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Kapernaroua" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Kapernaroua στο X">
+        <img class="portrait" src="./profiles/Kapernaroua.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Kapernaroua" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Kapernaroua" target="_blank" rel="noreferrer">@Kapernaroua</a>
+        <a class="source" href="https://pixabay.com/photos/woman-beauty-monochrome-makeup-1585593/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Kapernaroua: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Anastasiakourmp" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Anastasiakourmp στο X">
+        <img class="portrait" src="./profiles/Anastasiakourmp.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Anastasiakourmp" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Anastasiakourmp" target="_blank" rel="noreferrer">@Anastasiakourmp</a>
+        <a class="source" href="https://unsplash.com/photos/woman-wearing-white-t-shirt-smiling-tNCH0sKSZbA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Anastasiakourmp: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+    </div>
+          
+    <div class="marquee-group" aria-hidden="true">
+      
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/NikodemouC" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @NikodemouC στο X">
+        <img class="portrait" src="./profiles/NikodemouC.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @NikodemouC" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/NikodemouC" target="_blank" rel="noreferrer">@NikodemouC</a>
+        <a class="source" href="https://unsplash.com/photos/woman-standing-on-beach-PfK35Iw1JAo" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @NikodemouC: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/theophanak16656" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @theophanak16656 στο X">
+        <img class="portrait" src="./profiles/theophanak16656.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @theophanak16656" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/theophanak16656" target="_blank" rel="noreferrer">@theophanak16656</a>
+        <a class="source" href="https://unsplash.com/photos/woman-standing-in-middle-of-grasses-chnU2vKLAvU" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @theophanak16656: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/SpyropoulosBill" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @SpyropoulosBill στο X">
+        <img class="portrait" src="./profiles/SpyropoulosBill.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @SpyropoulosBill" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/SpyropoulosBill" target="_blank" rel="noreferrer">@SpyropoulosBill</a>
+        <a class="source" href="https://pxhere.com/en/photo/1295888" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @SpyropoulosBill: PxHere">
+          <span>Πηγή</span><strong>PxHere</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/stelioslask9" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @stelioslask9 στο X">
+        <img class="portrait" src="./profiles/stelioslask9.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @stelioslask9" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/stelioslask9" target="_blank" rel="noreferrer">@stelioslask9</a>
+        <a class="source" href="https://unsplash.com/photos/man-in-brown-crew-neck-shirt-p0B7ueoZz8E" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @stelioslask9: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/rabiolosko59603" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @rabiolosko59603 στο X">
+        <img class="portrait" src="./profiles/rabiolosko59603.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @rabiolosko59603" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/rabiolosko59603" target="_blank" rel="noreferrer">@rabiolosko59603</a>
+        <a class="source" href="https://unsplash.com/photos/man-in-blue-denim-jacket-holding-red-plastic-bucket-DbKhVpiewtA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @rabiolosko59603: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Manolis18Pol" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Manolis18Pol στο X">
+        <img class="portrait" src="./profiles/Manolis18Pol.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Manolis18Pol" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Manolis18Pol" target="_blank" rel="noreferrer">@Manolis18Pol</a>
+        <a class="source" href="https://www.pexels.com/photo/man-wearing-baseball-cap-and-backpack-at-golden-hour-1586663/?utm_source=Pinterest&amp;utm_medium=organic" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Manolis18Pol: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/PantSpyros61" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @PantSpyros61 στο X">
+        <img class="portrait" src="./profiles/PantSpyros61.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @PantSpyros61" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/PantSpyros61" target="_blank" rel="noreferrer">@PantSpyros61</a>
+        <a class="source" href="https://www.pexels.com/photo/photo-of-man-holding-camera-1484771/?utm_source=Pinterest&amp;utm_medium=organic" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @PantSpyros61: Pexels">
+          <span>Πηγή</span><strong>Pexels</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/sia_b55" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @sia_b55 στο X">
+        <img class="portrait" src="./profiles/sia_b55.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @sia_b55" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/sia_b55" target="_blank" rel="noreferrer">@sia_b55</a>
+        <a class="source" href="https://emma.pluska.sk/gal/lifestyle/rozpravka-ako-mlada-slovenka-dostala-medzi-australsku-insta-elitu-rozbehla-vyhodny-biznis" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @sia_b55: Plus 1 deň">
+          <span>Πηγή</span><strong>Plus 1 deň</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/NancyVeneracion" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @NancyVeneracion στο X">
+        <img class="portrait" src="./profiles/NancyVeneracion.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @NancyVeneracion" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/NancyVeneracion" target="_blank" rel="noreferrer">@NancyVeneracion</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-white-dress-standing-on-beach-during-daytime-oBUr1nRbcuA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @NancyVeneracion: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/SofiaLikou" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @SofiaLikou στο X">
+        <img class="portrait" src="./profiles/SofiaLikou.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @SofiaLikou" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/SofiaLikou" target="_blank" rel="noreferrer">@SofiaLikou</a>
+        <a class="source" href="https://unsplash.com/photos/grayscale-photo-of-persons-back-wESKMSgZJDo" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @SofiaLikou: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/IoannaVrioni" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @IoannaVrioni στο X">
+        <img class="portrait" src="./profiles/IoannaVrioni.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @IoannaVrioni" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/IoannaVrioni" target="_blank" rel="noreferrer">@IoannaVrioni</a>
+        <a class="source" href="https://unsplash.com/photos/woman-in-white-crew-neck-shirt-bL5mIaa_-pI" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @IoannaVrioni: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/daniiorda" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @daniiorda στο X">
+        <img class="portrait" src="./profiles/daniiorda.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @daniiorda" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/daniiorda" target="_blank" rel="noreferrer">@daniiorda</a>
+        <a class="source" href="https://unsplash.com/photos/closeup-photo-of-woman-wearing-black-coat-during-winter-aUfVce9MBx0" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @daniiorda: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Kapernaroua" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Kapernaroua στο X">
+        <img class="portrait" src="./profiles/Kapernaroua.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Kapernaroua" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Kapernaroua" target="_blank" rel="noreferrer">@Kapernaroua</a>
+        <a class="source" href="https://pixabay.com/photos/woman-beauty-monochrome-makeup-1585593/" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Kapernaroua: Pixabay">
+          <span>Πηγή</span><strong>Pixabay</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="profile-card">
+      <a class="portrait-link" href="https://x.com/Anastasiakourmp" target="_blank" rel="noreferrer"
+         aria-label="Άνοιγμα του προφίλ @Anastasiakourmp στο X">
+        <img class="portrait" src="./profiles/Anastasiakourmp.jpg"
+             alt="Εικόνα προφίλ του λογαριασμού @Anastasiakourmp" loading="eager">
+      </a>
+      <div class="card-copy">
+        <a class="handle" href="https://x.com/Anastasiakourmp" target="_blank" rel="noreferrer">@Anastasiakourmp</a>
+        <a class="source" href="https://unsplash.com/photos/woman-wearing-white-t-shirt-smiling-tNCH0sKSZbA" target="_blank" rel="noreferrer"
+           aria-label="Πηγή εικόνας για @Anastasiakourmp: Unsplash">
+          <span>Πηγή</span><strong>Unsplash</strong><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Οι σύνδεσμοι παραπέμπουν στην πηγή που καταγράφηκε κατά την έρευνα.
+        Η εύρεση μιας προγενέστερης εμφάνισης δεν αποδεικνύει ότι πρόκειται
+        για την αρχική δημοσίευση της εικόνας.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
